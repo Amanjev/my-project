@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Converter & Compressor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <svg width="100" height="100" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background Circle -->
+                <circle cx="60" cy="60" r="55" stroke="#4CAF50" stroke-width="5" fill="#ffffff" />
+                
+                <!-- Initials Text -->
+                <text id="letterA" x="50%" y="40%" text-anchor="middle" font-size="28" fill="#4CAF50" font-family="Arial, sans-serif">
+                    A
+                </text>
+                <text id="letterK" x="50%" y="60%" text-anchor="middle" font-size="28" fill="#4CAF50" font-family="Arial, sans-serif">
+                    K
+                </text>
+                <text id="letterV" x="50%" y="80%" text-anchor="middle" font-size="28" fill="#4CAF50" font-family="Arial, sans-serif">
+                    V
+                </text>
+            </svg>
+        </div>
+        <h1>File Converter & Compressor</h1>
+        <div class="upload-section">
+            <input type="file" id="fileInput" />
+            <select id="conversionType">
+                <option value="pdfToImage">PDF to Image</option>
+                <option value="imageToPdf">Image to PDF</option>
+                <option value="textToPdf">Text to PDF</option>
+                <option value="docToPdf">DOC to PDF</option>
+                <option value="pdfToDoc">PDF to DOC</option>
+                <option value="pdfToText">PDF to Text</option>
+                <option value="compressFile">Compress File</option>
+                <option value="imageToText">Image to Text</option>
+                <option value="textToImage">Text to Image</option>
+            </select>
+            <button onclick="convertFile()">Convert</button>
+        </div>
+
+        <div class="result-section" id="resultSection">
+            <!-- Converted or compressed files will be displayed here -->
+            <button id="downloadButton" style="display:none;">Download</button>
+        </div>
+    </div>
+
+    <!-- Adding the necessary libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.0/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
+    <!-- Linking JavaScript file -->
+    <script src="app.js"></script>
+    <script src="service-worker.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.log('Service Worker registration failed', err));
+            });
+        }
+        </script>
+        
+</body>
+</html>
